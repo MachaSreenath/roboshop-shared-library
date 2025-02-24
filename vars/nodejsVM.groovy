@@ -70,9 +70,9 @@ pipeline {
                     repository: "${configMap.component}",
                     credentialsId: 'nexus-auth',
                     artifacts: [
-                        [artifactId: 'catalogue',
+                        [artifactId: "${configMap.component}",
                         classifier: '',
-                        file: 'catalogue.zip',
+                        file: "${configMap.component}.zip",
                         type: 'zip']
                                 ]
                              )
@@ -90,7 +90,7 @@ pipeline {
                             string(name: 'version', value:"$packageVersion"),
                             string(name: 'environment', value:"dev")
                         ]
-                        build job: "catalogue-deploy", wait: true, parameters: params
+                        build job: "${configMap.component}-deploy", wait: true, parameters: params
                         }
                     }
                 }
