@@ -39,15 +39,14 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh """
-                    echo "unit test will run here"
+                    echo "unit test here"
                 """
             }
         }
         stage('Sonar Scan') {
             steps {
                 sh """
-                    echo "usually command here is sonar-scanner"
-                    echo "sonar scan will run here"
+                    echo "here the command is sonar-scanner"
                 """
             }
         }  
@@ -60,7 +59,7 @@ pipeline {
                 """
             }
         }
-        stage('Publish Artifact') {
+        stage('Publishing Artifact') {
             steps {
                  nexusArtifactUploader(
                     nexusVersion: 'nexus3',
@@ -99,14 +98,14 @@ pipeline {
     // post build
     post { 
         always { 
-            echo 'I will always say Hello again!'
+            echo 'pipeline fails r success i will execute'
             deleteDir()
         }
         failure { 
-            echo 'this runs when pipeline is failed, used generally to send some alerts'
+            echo 'your pipeline is failed'
         }
         success{
-            echo 'I will say Hello when pipeline is success'
+            echo 'your pipeline is success'
         }
     }
 }
