@@ -13,7 +13,7 @@ def decidePipeline(Map configMap){
             nodejsEKS(configMap)
             break
         default: 
-            error "Application not recognizes"
+            error "no application recognized"
             break
     }
 }
