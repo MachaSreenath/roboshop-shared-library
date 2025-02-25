@@ -5,10 +5,6 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    environment {
-        packageVersion = ''
-        nexusUrl = '187.21.8.89:8081' //private_ip of nexus instance, here we must put port number also.
-    }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
@@ -90,7 +86,7 @@ pipeline {
                             string(name: 'version', value:"$packageVersion"),
                             string(name: 'environment', value:"dev")
                         ]
-                        build job: "${configMap.component}-deploy", wait: true, parameters: params
+                        build job: "../${configMap.component}-deploy", wait: true, parameters: params
                         }
                     }
                 }
@@ -110,3 +106,5 @@ pipeline {
     }
 }
 }
+
+// in 93rd line there we put "../" because we created a folder in jenkins, inside that folder there are two folders again catalogue and catalogue-deploy. Now this pipeline is in the catalogue so to go to the deployment process it has to go one step back and go to the catalogue-deploy folder, that's why we wrote.
